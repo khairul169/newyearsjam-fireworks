@@ -16,4 +16,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Fireworks"
+run/main_scene="res://scenes/game.tscn"
 config/icon="res://icon.png"
+
+[debug]
+
+gdscript/warnings/enable=false
+
+[rendering]
+
+quality/driver/driver_name="GLES2"

@@ -1,4 +1,117 @@
-[gd_scene format=2]
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scripts/game.gd" type="Script" id=1]
+[ext_resource path="res://world/environment.tres" type="Environment" id=2]
+[ext_resource path="res://scripts/player.gd" type="Script" id=3]
+[ext_resource path="res://scripts/camera.gd" type="Script" id=4]
+
+[sub_resource type="CubeMesh" id=3]
+
+size = Vector3( 5, 10, 5 )
+
+[sub_resource type="ConcavePolygonShape" id=4]
+
+data = PoolVector3Array( -2.5, 5, 2.5, 2.5, 5, 2.5, -2.5, -5, 2.5, 2.5, 5, 2.5, 2.5, -5, 2.5, -2.5, -5, 2.5, 2.5, 5, -2.5, -2.5, 5, -2.5, 2.5, -5, -2.5, -2.5, 5, -2.5, -2.5, -5, -2.5, 2.5, -5, -2.5, 2.5, 5, 2.5, 2.5, 5, -2.5, 2.5, -5, 2.5, 2.5, 5, -2.5, 2.5, -5, -2.5, 2.5, -5, 2.5, -2.5, 5, -2.5, -2.5, 5, 2.5, -2.5, -5, -2.5, -2.5, 5, 2.5, -2.5, -5, 2.5, -2.5, -5, -2.5, 2.5, 5, 2.5, -2.5, 5, 2.5, 2.5, 5, -2.5, -2.5, 5, 2.5, -2.5, 5, -2.5, 2.5, 5, -2.5, -2.5, -5, 2.5, 2.5, -5, 2.5, -2.5, -5, -2.5, 2.5, -5, 2.5, 2.5, -5, -2.5, -2.5, -5, -2.5 )
+
+[sub_resource type="SphereShape" id=5]
+
+radius = 0.8
+
+[sub_resource type="CapsuleMesh" id=2]
+
+radius = 0.5
+mid_height = 0.6
 
 [node name="scene" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="env" type="WorldEnvironment" parent="."]
+environment = ExtResource( 2 )
+
+[node name="light" type="DirectionalLight" parent="."]
+transform = Transform( 0.944424, -0.215404, 0.248322, -0.0568774, 0.636934, 0.768817, -0.323771, -0.740214, 0.589284, 0, 0, 0 )
+
+[node name="buildings" type="Spatial" parent="."]
+editor/display_folded = true
+
+[node name="building1" type="MeshInstance" parent="buildings"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.41876, 0, -16.4073 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="buildings/building1"]
+
+[node name="CollisionShape" type="CollisionShape" parent="buildings/building1/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="building2" type="MeshInstance" parent="buildings"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.0756, 0, -7.75492 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="buildings/building2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="buildings/building2/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="building3" type="MeshInstance" parent="buildings"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.57055, 0, 6.12104 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="buildings/building3"]
+
+[node name="CollisionShape" type="CollisionShape" parent="buildings/building3/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="building4" type="MeshInstance" parent="buildings"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -19.1016, 0, -5.15954 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="buildings/building4"]
+
+[node name="CollisionShape" type="CollisionShape" parent="buildings/building4/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="building5" type="MeshInstance" parent="buildings"]
+editor/display_folded = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5916, 0, 5.15165 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="StaticBody" type="StaticBody" parent="buildings/building5"]
+
+[node name="CollisionShape" type="CollisionShape" parent="buildings/building5/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="player" type="KinematicBody" parent="."]
+script = ExtResource( 3 )
+
+[node name="shape" type="CollisionShape" parent="player"]
+shape = SubResource( 5 )
+
+[node name="body" type="Spatial" parent="player"]
+editor/display_folded = true
+
+[node name="mesh" type="MeshInstance" parent="player/body"]
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="mesh2" type="MeshInstance" parent="player/body"]
+transform = Transform( 0.507337, 0, 0, 0, -2.21764e-08, -0.507337, 0, 0.507337, -2.21764e-08, 0, 0.65112, -0.313934 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="cam_yaw" type="Spatial" parent="player"]
+script = ExtResource( 4 )
+
+[node name="cam_pitch" type="Spatial" parent="player/cam_yaw"]
+
+[node name="camera" type="Camera" parent="player/cam_yaw/cam_pitch"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1899, 1.76494, 4 )
 
